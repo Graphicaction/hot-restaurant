@@ -31,7 +31,7 @@
                 <form role="form">
                   <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" class="form-control" id="reserve_name"><div id="norton-idsafe-field-styling-divId" style="height:24.727272727272727px;max-width:24.727272727272727px;vertical-align:top; position:absolute; top:83.63636363636364px;left:884.9824046920821px;cursor:pointer;resize: both;z-index:2147483646;"><img id="norton-idsafe-field-logo-imgId" src="chrome-extension://admmjipmmciaobhojoghlmleefbicajg/content/images/ic-field-logo.svg" style="height:24.727272727272727px; max-width:24.727272727272727px;"></div>
+                    <input type="text" class="form-control" id="reserve_name">
                   </div>
                   <div class="form-group">
                     <label for="">Phone Number</label>
@@ -72,7 +72,11 @@
 
                     $.post("api/tables", newTable)
                     .then( data => {
-                        alert(data.name);
+                        console.log(data);
+                        if(data.success != false)
+                            alert(data.name + " your table is reserved");
+                        else
+                            alert("Sorry, You have been added to waitlist");
                     });
                 });
             });
