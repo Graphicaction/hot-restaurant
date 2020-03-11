@@ -16,7 +16,7 @@
           <h2 class="text-center">Make your reservation</h2>
           <br>
           <div class="text-center">
-            <a href="/tables"><button type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-list-alt"></span> View Tables</button></a>
+            <a href="/table"><button type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-list-alt"></span> View Tables</button></a>
             <a href="/"><button type="button" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-home"></span></button></a>
           </div>
         </div>
@@ -45,7 +45,7 @@
                     <label for="">Unique ID</label>
                     <input type="text" class="form-control" id="reserve_uniqueID">
                   </div>
-                  <button type="submit" class="btn btn-primary submit">Submit</button>
+                  <button type="submit" id="add-btn" class="btn btn-primary submit">Submit</button>
                 </form>
               </div>
             </div>
@@ -58,7 +58,24 @@
         </footer>
       </div>
         <script type="text/javascript">
-         
+            
+            $.get("/api/tables" , (data) => {
+                    $("#add-btn").on("click", () => {
+                    event.preventDefault();
+
+                    const newTable = {
+                        name: $("#reserve_name").val().trim(),
+                        id: $("#reserve_uniqueID").val().trim(),
+                        phoneNumber: $("#reserve_phone").val().trim(),
+                        email: $("#reserve_email").val().trim()
+                    }
+
+                    $.post("api/tables", newTable)
+                    .then( data => {
+                        alert(data.name);
+                    });
+                });
+            });
         </script>
 </body>
 </html>
